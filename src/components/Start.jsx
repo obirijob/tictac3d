@@ -52,7 +52,7 @@ function Start() {
                       name,
                       password,
                     })
-                    localStorage.setItem('gameId', data.id)
+                    localStorage.setItem('game', data.id + '_' + password)
                   } catch (er) {
                     alert(er)
                   }
@@ -116,7 +116,7 @@ function Start() {
                       id: jGame,
                       password: jPassword,
                     })
-                    localStorage.setItem('gameId', data.id + '_2')
+                    localStorage.setItem('game', data.id + '_2_' + jPassword)
                   } catch (er) {
                     alert(er)
                   }
