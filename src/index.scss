@@ -26,3 +26,52 @@ body {
     transform: scale(0.8);
   }
 }
+
+button {
+  position: relative;
+  padding: 1em 3em;
+  height: 6em;
+  width: 14em;
+  color: white;
+  background: black;
+  border: solid 0.1em white;
+  outline: none;
+  font-family: title;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  &::after {
+    content: attr(content);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: black;
+    background: white;
+    position: absolute;
+    right: 0.2em;
+    bottom: 0.2em;
+    border: solid 0.3em black;
+    font-size: 1.4em;
+    transition: 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  &:hover {
+    &::after {
+      border: solid 0.1em white;
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
+input {
+  font-size: 0.3em;
+  color: black;
+  font-family: 'title';
+  background: white;
+  border: solid 0.1em white;
+  box-shadow: inset black 0 0 5px;
+  padding: 0.5em;
+  outline: none;
+}
