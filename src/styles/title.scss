@@ -1,0 +1,11 @@
+/** @format */
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .letter {
+    min-width: 0.5em;
+    font-size: 0.8em;
+  }
+}

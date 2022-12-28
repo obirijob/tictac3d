@@ -1,0 +1,28 @@
+/** @format */
+
+* {
+  color: white;
+}
+
+body {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 75px;
+  perspective: 20em;
+  perspective-origin: 50% calc(50% - 6em);
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: title;
+  src: url('./fonts/nexa-rust/NexaRustSlab-BlackShadow01.otf');
+}
+
+@media (max-width: 1000px) {
+  body {
+    transform: scale(0.8);
+  }
+}
