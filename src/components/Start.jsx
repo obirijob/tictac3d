@@ -8,7 +8,7 @@ import '../styles/start.scss'
 import Modal from './Modal'
 import Title from './Title'
 
-function Start() {
+function Start({ reloadGame }) {
   const [newGame, setNewGame] = useState(false)
   const [joinGame, setJoinGame] = useState(false)
   const [name, setName] = useState('')
@@ -52,7 +52,8 @@ function Start() {
                       name,
                       password,
                     })
-                    localStorage.setItem('game', data.id + '_' + password)
+                    localStorage.setItem('game', data.id + '_1_' + password)
+                    reloadGame()
                   } catch (er) {
                     alert(er)
                   }
@@ -116,7 +117,8 @@ function Start() {
                       id: jGame,
                       password: jPassword,
                     })
-                    localStorage.setItem('game', data.id + '_2_' + jPassword)
+                    localStorage.setItem('game', data.id + '_' + jPassword)
+                    reloadGame()
                   } catch (er) {
                     alert(er)
                   }
@@ -139,6 +141,7 @@ function Start() {
                     type="text"
                     placeholder="Name"
                     required
+                    onClick={e => reloadGame()}
                   />
                   <input
                     onInput={e => setJGame(e.target.value)}

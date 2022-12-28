@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 import '../styles/grid.scss'
 import Cell from './Cell'
 
-function Grid({ columns, rows }) {
+function Grid({ columns, rows, clicked }) {
   const [matrix, setMatrix] = useState([[]])
 
   useEffect(() => {
@@ -22,10 +22,16 @@ function Grid({ columns, rows }) {
 
   return (
     <div className="grid">
-      {matrix.map((r, i) => (
-        <div className="rows" key={`row${i}`}>
-          {r.map((c, i) => (
-            <Cell key={`col${i}`} />
+      {matrix.map((r, ir) => (
+        <div className="rows" key={`row${ir}`}>
+          {r.map((c, ic) => (
+            <Cell
+              key={`col${ic}`}
+              clicked={() => {
+                console.log(ir, ic)
+                clicked(ir, ic)
+              }}
+            />
           ))}
         </div>
       ))}

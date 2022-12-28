@@ -7,13 +7,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: rotate 30s infinite linear;
-  // transform: rotateY(20deg);
+  // animation: rotate 180s infinite linear;
+  transform: rotateY(20deg) translateY(-2em);
+
+  .players {
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: capitalize;
+    font-size: 0.5em;
+    padding: 1em;
+  }
+
   .floor {
     position: absolute;
     transform: translate(-50%, -10em) scale(2) rotateX(90deg);
     width: 35em;
-    top: 1em;
+    top: 5em;
     height: 35em;
     background-image: radial-gradient(#0000, #000 75%),
       repeating-conic-gradient(from 45deg, #111 0deg 90deg, #222 90deg 180deg);

@@ -4,9 +4,9 @@ import React from 'react'
 
 import '../styles/cell.scss'
 
-function Cell() {
+function Cell({ clicked }) {
   return (
-    <div className="cell">
+    <div className="cell" onClick={() => clicked('Heeeeey!')}>
       <div className="top"></div>
       <div className="bottom"></div>
 
