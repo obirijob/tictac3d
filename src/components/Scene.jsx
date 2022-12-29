@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 import Title from '../components/Title'
@@ -9,16 +9,46 @@ import '../styles/scene.scss'
 import Grid from './Grid'
 import Start from './Start'
 import constants from '../helpers/constants'
+import postRequest from '../helpers/postRequest'
 
 function Scene({ inGame, reloadCred, gameData }) {
+  const [gridMatrix, setGridMatrix] = useState([])
+  const [trigger, setTrigger] = useState(0)
+
   const ws = new WebSocket(constants.ws)
 
   useEffect(() => {
-    if (gameData) ws.addEventListener('open', webSocketEvent)
-  }, [gameData])
+    ws.addEventListener('open', openSock)
+    ws.addEventListener('message', messageEvent)
 
-  function webSocketEvent(w) {
-    // w.send('how are you?')
+    return () => {
+      ws.removeEventListener('open', openSock)
+      ws.removeEventListener('message', messageEvent)
+    }
+    // eslint-disable-next-line
+  }, [trigger])
+
+  useEffect(() => {
+    let t = setInterval(() => {
+      console.log('running')
+      setTrigger(x => (x < 1 ? (x += 1) : clearInterval(t)))
+    }, 200)
+    return () => {
+      clearInterval(t)
+    }
+  }, [])
+
+  function messageEvent({ data }) {
+    setGridMatrix(JSON.parse(data))
+  }
+
+  function openSock() {
+    // alert(gameData.name)
+    if (gameData) {
+      ws.send(
+        `registerSocket*<>*${gameData.name}<//>${gameData.game}<//>${gameData.opponent}`
+      )
+    }
   }
 
   return (
@@ -34,13 +64,28 @@ function Scene({ inGame, reloadCred, gameData }) {
             </div>
           </div>
           <Grid
+            gridMatrix={gridMatrix}
+            me={gameData.name}
             columns={3}
             rows={3}
-            clicked={(r, c) =>
-              ws.send(
-                `playermove*<>*${gameData.game}<//>${gameData.name}<//>${r}<//>${c}`
-              )
-            }
+            clicked={async (r, c) => {
+              try {
+                await postRequest(`play/move`, {
+                  gameId: gameData.game,
+                  player: gameData.name,
+                  row: r,
+                  column: c,
+                })
+                ws.send(
+                  `loadGrid*<>*${gameData.game}<//>${gameData.name}<//>${gameData.opponent}`
+                )
+              } catch (error) {
+                alert(error.message)
+              }
+              // ws.send(
+              //   `playermove*<>*${gameData.game}<//>${gameData.name}<//>${r}<//>${c}`
+              // )
+            }}
           />
           <div
             className="actions"

@@ -1,10 +1,10 @@
 /** @format */
 
-// local
-const url = 'http://localhost:2000/'
-const ws = 'ws://localhost:2001/'
-// // url
-// const url = 'http://172.20.10.3:2000/'
-// const ws = 'ws://172.20.10.3:2001/'
+// // local
+// const url = 'http://localhost:2000/'
+// const ws = 'ws://localhost:2001/'
+// url
+const url = 'http://tictactoe.obiri.africa/'
+const ws = 'ws://tictactoe.obiri.africa/'
 
 module.exports = { url, ws }
