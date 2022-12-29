@@ -27,6 +27,9 @@ body {
     transform: scale(0.8);
   }
 }
+form {
+  transform: translateZ(0.1em);
+}
 
 button {
   position: relative;
@@ -68,6 +71,7 @@ button {
 }
 
 input {
+  // transform: translateZ(1em);
   font-size: 0.3em;
   color: black;
   font-family: 'title';

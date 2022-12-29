@@ -91,7 +91,15 @@ function Scene({ inGame, reloadCred, gameData }) {
             className="actions"
             style={{ display: 'flex', margin: '.3em', gap: '.3em' }}
           >
-            <button content="Reset" />
+            <button
+              content="Reset"
+              onClick={async () => {
+                await postRequest('play/reset', { gameId: gameData.game })
+                ws.send(
+                  `loadGrid*<>*${gameData.game}<//>${gameData.name}<//>${gameData.opponent}`
+                )
+              }}
+            />
             <button
               content="Exit"
               onClick={() => {
